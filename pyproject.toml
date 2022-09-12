@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "phigros-bot"
+version = "0.1.0"
+description = ""
+authors = ["purofle <purofle@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+aiogram = "^2.22.1"
+thefuzz = {extras = ["speedup"], version = "^0.19.0"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
