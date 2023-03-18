@@ -31,7 +31,7 @@ with open("phigros_bot/Phigros.json", "r") as f:
 
 phigros: Dict[str, Any] = json.loads(raw_phigros_json)
 music_name = list(phigros.keys())
-logging.info(f"谱面 JSON 信息加载完成，大小为%i", len(phigros))
+logging.info("谱面 JSON 信息加载完成，大小为%i", len(phigros))
 
 with open("phigros_bot/tips.json", "r") as f:
     raw_tips_json = f.read()
@@ -41,23 +41,23 @@ raw_tips: Dict[str, List[str]] = json.loads(raw_tips_json)
 # 将 raw_tips 展开为 List[str]
 tips = list(itertools.chain.from_iterable(raw_tips.values()))
 
-logging.info(f"Tips JSON 信息加载完成，大小为%i", len(tips))
+logging.info("Tips JSON 信息加载完成，大小为%i", len(tips))
 
 info = {
-        "歌名": "song",
-        "曲绘": "illustration",
-        "高清曲绘": "illustration_big",
-        "BPM": "bpm",
-        "曲师": "composer",
-        "长度": "length",
-        "画师": "illustrator",
-    }
+    "歌名": "song",
+    "曲绘": "illustration",
+    "高清曲绘": "illustration_big",
+    "BPM": "bpm",
+    "曲师": "composer",
+    "长度": "length",
+    "画师": "illustrator",
+}
 
 chart_info = {
-        "等级": "level",
-        "定数": "difficulty",
-        "Max Combo": "combo",
-        "谱师": "charter",
+    "等级": "level",
+    "定数": "difficulty",
+    "Max Combo": "combo",
+    "谱师": "charter",
 }
 
 
