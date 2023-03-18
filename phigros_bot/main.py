@@ -6,8 +6,7 @@ Use of this source code is governed by the GNU AGPLv3 license that can be found 
 
 https://www.gnu.org/licenses/gpl-3.0.html
 
-需要在运行目录下载json： https://github.com/ssmzhn/Phigros/raw/main/Phigros.json
-运行需要传入API_TOKEN作为环境变量
+运行需要传入 Bot Token 作为参数
 """
 import hashlib
 import json
