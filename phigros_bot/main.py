@@ -6,7 +6,9 @@ Use of this source code is governed by the GNU AGPLv3 license that can be found 
 
 https://www.gnu.org/licenses/gpl-3.0.html
 
-需要在运行目录下载json： https://github.com/ssmzhn/Phigros/raw/main/Phigros.json
+需要在运行目录下载json： 
+https://github.com/ssmzhn/Phigros/raw/main/Phigros.json
+https://github.com/ssmzhn/Phigros/raw/main/tips.json
 运行需要传入API_TOKEN作为环境变量
 """
 import hashlib
@@ -29,12 +31,21 @@ dp = Dispatcher(bot)
 
 logging.info("读取 JSON 信息")
 with open("phigros_bot/Phigros.json", "r") as f:
-    raw_json = f.read()
+    raw_phigros_json = f.read()
 
-phigros: Dict[str, Any] = json.loads(raw_json)
+phigros: Dict[str, Any] = json.loads(raw_phigros_json)
 music_name = list(phigros.keys())
-logging.info(f"JSON 信息加载完成，大小为{len(phigros)}")
+logging.info(f"谱面 JSON 信息加载完成，大小为{len(phigros)}")
 
+with open("phigros_bot/tips.json", "r") as f:
+    raw_tips_json = f.read()
+raw_tips: Dict[str, Any] = json.loads(raw_tips_json)
+tips = []
+for x in raw_tips.values():
+    for y in x:
+        tips.append(y)
+
+logging.info(f"Tips JSON 信息加载完成，大小为{len(tips)}")
 
 @dp.message_handler(commands=["start", "help"])
 async def send_welcome(message: types.Message):
@@ -69,10 +80,13 @@ async def send_random(message: types.Message):
         chart_basic_info += "\n".join(
             [f"{c[0]}: {charts[i].get(c[1])}" for c in chart_info.items()]
         )
-        chart_basic_info += "\n"
+        chart_basic_info += "\n\n"
 
-    await message.reply(basic_info+"\n"+chart_basic_info)
-
+    await message.reply(basic_info+"\n\n"+chart_basic_info.strip())
+@dp.message_handler(commands=["tip"])
+async def get_tip(message: types.Message):
+    tip = sample(tips,1)[0]
+    await message.reply(tip)
 @dp.inline_handler()
 async def find_music(inline_query: InlineQuery):
     text = inline_query.query
