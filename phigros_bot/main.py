@@ -31,7 +31,7 @@ with open("phigros_bot/Phigros.json", "r") as f:
 
 phigros: Dict[str, Any] = json.loads(raw_phigros_json)
 music_name = list(phigros.keys())
-logging.info(f"谱面 JSON 信息加载完成，大小为{len(phigros)}")
+logging.info(f"谱面 JSON 信息加载完成，大小为%i", len(phigros))
 
 with open("phigros_bot/tips.json", "r") as f:
     raw_tips_json = f.read()
@@ -41,7 +41,7 @@ raw_tips: Dict[str, List[str]] = json.loads(raw_tips_json)
 # 将 raw_tips 展开为 List[str]
 tips = list(itertools.chain.from_iterable(raw_tips.values()))
 
-logging.info(f"Tips JSON 信息加载完成，大小为{len(tips)}")
+logging.info(f"Tips JSON 信息加载完成，大小为%i", len(tips))
 
 info = {
         "歌名": "song",
@@ -68,6 +68,12 @@ async def send_welcome(message: types.Message):
 
 @dp.message_handler(commands=["random"])
 async def send_random(message: types.Message):
+    """
+    随机发送一首歌曲的信息
+    https://github.com/purofle/phigros_bot/issues/10
+    :param message:
+    :return:
+    """
     random_song = random.sample(tuple(phigros.values()), 1)[0]
 
     basic_info = "\n".join([f"{i[0]}: {random_song.get(i[1])}" for i in info.items()])
@@ -85,6 +91,11 @@ async def send_random(message: types.Message):
 
 @dp.message_handler(commands=["tip"])
 async def get_tip(message: types.Message):
+    """
+    随机发送一条 tip
+    :param message:
+    :return:
+    """
     tip = random.sample(tips, 1)[0]
     await message.reply(tip)
 
