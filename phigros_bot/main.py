@@ -14,6 +14,7 @@ import json
 import logging
 import sys
 from typing import Any, Dict
+from random import sample
 
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.types import InlineQuery, InputTextMessageContent, InlineQueryResultArticle
@@ -39,6 +40,38 @@ logging.info(f"JSON 信息加载完成，大小为{len(phigros)}")
 async def send_welcome(message: types.Message):
     await message.reply("Hi!\n欢迎使用该 Bot! 请使用 inline 调用。\n")
 
+@dp.message_handler(commands=["random"])
+async def send_random(message: types.Message):
+    songs = phigros.values()
+    randomed_song = sample(tuple(songs),1)[0]
+    info = {
+        "歌名": "song",
+        "曲绘": "illustration",
+        "高清曲绘": "illustration_big",
+        "BPM": "bpm",
+        "曲师": "composer",
+        "长度": "length",
+        "画师": "illustrator",
+    }
+
+    chart_info = {
+        "等级": "level",
+        "定数": "difficulty",
+        "Max Combo": "combo",
+        "谱师": "charter",
+    }
+
+    basic_info = "\n".join([f"{i[0]}: {randomed_song.get(i[1])}" for i in info.items()])
+    charts: Dict[str, Dict[str, str]] = randomed_song["chart"]
+    chart_basic_info=""
+    for i in charts.keys():
+        chart_basic_info += i+"\n"
+        chart_basic_info += "\n".join(
+            [f"{c[0]}: {charts[i].get(c[1])}" for c in chart_info.items()]
+        )
+        chart_basic_info += "\n"
+
+    await message.reply(basic_info+"\n"+chart_basic_info)
 
 @dp.inline_handler()
 async def find_music(inline_query: InlineQuery):
