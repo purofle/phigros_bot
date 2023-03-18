@@ -44,20 +44,20 @@ tips = list(itertools.chain.from_iterable(raw_tips.values()))
 logging.info(f"Tips JSON 信息加载完成，大小为%i", len(tips))
 
 info = {
-        "歌名": "song",
-        "曲绘": "illustration",
-        "高清曲绘": "illustration_big",
-        "BPM": "bpm",
-        "曲师": "composer",
-        "长度": "length",
-        "画师": "illustrator",
-    }
+    "歌名": "song",
+    "曲绘": "illustration",
+    "高清曲绘": "illustration_big",
+    "BPM": "bpm",
+    "曲师": "composer",
+    "长度": "length",
+    "画师": "illustrator",
+}
 
 chart_info = {
-        "等级": "level",
-        "定数": "difficulty",
-        "Max Combo": "combo",
-        "谱师": "charter",
+    "等级": "level",
+    "定数": "difficulty",
+    "Max Combo": "combo",
+    "谱师": "charter",
 }
 
 
