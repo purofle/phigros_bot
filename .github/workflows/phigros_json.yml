@@ -3,6 +3,7 @@ name: Pull Phigros Charts and Tips
 on:
   schedule:
     - cron: "0 0 * * *"
+  workflow_dispatch:
 
 jobs:
 
