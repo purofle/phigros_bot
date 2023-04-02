@@ -16,6 +16,7 @@ jobs:
       - name: Download tips.json and update files
         run: |
           cd phigros_bot
+          rm tips.json Phigros.json
           wget https://github.com/ssmzhn/Phigros/raw/main/tips.json
           wget https://github.com/ssmzhn/Phigros/raw/main/Phigros.json
       - name: Commit files
