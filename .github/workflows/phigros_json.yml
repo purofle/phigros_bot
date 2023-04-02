@@ -16,8 +16,8 @@ jobs:
       - name: Download tips.json and update files
         run: |
           cd phigros_bot
-          curl -O https://github.com/ssmzhn/Phigros/raw/main/tips.json
-          curl -O https://github.com/ssmzhn/Phigros/raw/main/Phigros.json
+          wget https://github.com/ssmzhn/Phigros/raw/main/tips.json
+          wget https://github.com/ssmzhn/Phigros/raw/main/Phigros.json
       - name: Commit files
         run: |
             git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
